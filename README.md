@@ -1,50 +1,25 @@
 # Bosses'Rise Cinematic Unlock
+针对 [Bosses'Rise](https://www.curseforge.com/minecraft/mc-mods/bossesrise)的 Forge 1.20.1 补丁模组。
 
-Forge 1.20.1 patch for [Bosses'Rise](https://www.curseforge.com/minecraft/mc-mods/bossesrise) (`block_factorys_bosses` 2.1.2).
+修改 Bosses'Rise 过场动画的运行行为：
+- **自由相机** — 取消强制接管的剧情相机，玩家完全保留视角与移动控制权。
+- **移除黑屏** — 彻底关闭全屏黑色遮罩效果。
+- **移除宽银幕黑边** — 取消过场上下黑边（可配置）。
+- **UI 保持可见** — 播放过场时不再隐藏游戏界面。
+- **屏蔽药水效果** — 移除模组在转场期间施加的抗性/缓慢效果。
+- **雪人狂暴不再锁移动** — 雪人狂暴过场不会再锁定玩家的移动输入。
+- **音乐 Bug 修复** — 原问题：服务端没有正确通知客户端停止 BOSS 音乐，模组通过 `UpdateBossBarTypeMessage` 发送过期数据，导致巨龙死亡过场里 BOSS 音乐持续循环播放。本修复让网络数据包携带最新的音乐状态标记。
+- **龙生成器移除结构校验** — BOSS生成器方块只要检测到8格范围内存在玩家，就会召唤地狱巨龙，不再要求必须处在巨龙塔结构内。
 
-Changes how Bosses'Rise cutscenes behave:
+## 配置
+客户端配置文件：`config/bossesrise_cinematic_unlock-client.toml`
 
-- **Free camera** - the forced cinematic camera takeover is cancelled; you keep full look/move control.
-- **No black screen** - the full-screen black overlay is always cancelled.
-- **No letterbox bars** - the black bars are cancelled (configurable).
-- **No hidden UI** - the GUI is no longer hidden during cutscenes.
-- **No potion effects** - the Resistance/Slowness effects the mod applies during transitions are cancelled (Dragon 255/IV, Kraken 255, Yeti 200).
-- **No yeti freeze** - the yeti's enrage cutscene no longer locks the player's movement input.
-- **Music bug fix** - clients were never notified that boss music should stop (the mod sent a stale record in `UpdateBossBarTypeMessage`), so the boss music kept playing/looping through the dragon death cinematic. The packet now carries the current music flag.
-- **Dragon spawner without structure check** - the BossSpawnerBlock now summons the Infernal Dragon whenever a player is within 8 blocks, no matter where the block is (the Dragon Tower structure requirement is removed).
-
-## Configuration
-
-Client config file: `config/bossesrise_cinematic_unlock-client.toml`
-
-| Option | Default | Description |
+| 配置项 | 默认值 | 说明 |
 | --- | --- | --- |
-| `forceCameraMovement` | `false` | Keep the original forced cinematic camera. When enabled, cutscenes also keep their potion effects and hidden UI, exactly like the original mod. |
-| `blackBars` | `false` | Keep the cinematic letterbox bars. |
+| `forceCameraMovement` | `false` | 启用原版强制剧情相机。开启后过场会恢复原版药水效果、隐藏UI，行为和原模组完全一致。 |
+| `blackBars` | `false` | 保留过场动画的上下宽银幕黑边。 |
 
-The black-screen effect is always cancelled (not configurable).
+黑屏效果会永久关闭，该功能不提供配置开关。
 
-## Mixins
-
-| Mixin | Target | Purpose |
-| --- | --- | --- |
-| `BossesRiseCinematicCameraMixin` (client) | `BossesRiseClientCinematicCamera#startCinematicCamera` | Blocks CAMERA / BARS / BLACK / HIDE_GUI handlers per config |
-| `BossesRiseEffectMixin` | `LivingEntity#addEffect` | Cancels Resistance 255/200 and Slowness 4/200 cinematic effects |
-| `YetiInputLockMixin` (client) | `ClientEvents#updateMovementInput` | Removes the yeti enrage-cutscene movement input lock |
-| `BossMusicSyncMixin` | `AbstractBossEntity#setPlayingMusic` (lambda) | Sends the current music flag to clients |
-| `StateBossMusicSyncMixin` | `AbstractStateBossEntity#setPlayingMusic` (lambda) | Same fix for state-machine bosses (Kraken) |
-| `BossSpawnerTriggerMixin` | `BossSpawnerBlockEntity#tick` | Removes the Dragon Tower structure check; player within 8 blocks summons the dragon |
-
-## Build
-
-```
-gradlew build
-```
-
-Output: `build/libs/bossesrise_cinematic_unlock-1.0.1.jar`
-
-The original mod jar and GeckoLib in `libs/` are only used for compile-time linking (`fg.deobf`) and are NOT bundled into the output.
-
-## Install
-
-Drop the built jar into the `mods` folder of a Forge 1.20.1 instance that also has Bosses'Rise 2.1.2 and GeckoLib installed (both client and server, since the music fix is server-side).
+## 安装
+将编译得到的Jar放入 Forge 1.20.1 实例的 `mods` 文件夹，环境需要同时安装 Bosses'Rise 2.1.2 与 GeckoLib；**客户端与服务端都需要安装本模组**，因为音乐修复包含服务端逻辑。
