@@ -1,5 +1,5 @@
 # Bosses'Rise Cinematic Unlock
-针对 [Bosses'Rise](https://www.curseforge.com/minecraft/mc-mods/bossesrise)的 Forge 1.20.1 补丁模组。
+针对 [Bosses'Rise](https://www.curseforge.com/minecraft/mc-mods/bossesrise)的 Forge 1.20.1 补丁模组，简单来说就是取消了BOSS战过场动画中对玩家镜头的强制运镜。
 
 修改 Bosses'Rise 过场动画的运行行为：
 - **自由相机** — 取消强制接管的剧情相机，玩家完全保留视角与移动控制权。
