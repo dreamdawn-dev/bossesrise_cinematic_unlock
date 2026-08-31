@@ -54,15 +54,16 @@ mixin {
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    // Bosses'Rise production jar (SRG): compile-time bridge + dev run classpath.
-    // Not bundled into the output jar.
-    implementation fg.deobf(files("libs/block_factorys_bosses-2.1.2-forge-1.20.1.jar"))
-    implementation fg.deobf(files("libs/geckolib-forge-1.20.1-4.8.3.jar"))
+    implementation fg.deobf(":block_factorys_bosses:2.1.2-forge-1.20.1")
+    implementation fg.deobf(":geckolib-forge:1.20.1-4.8.3")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
