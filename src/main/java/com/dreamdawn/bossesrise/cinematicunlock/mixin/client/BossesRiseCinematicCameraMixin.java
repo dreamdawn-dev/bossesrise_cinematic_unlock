@@ -10,20 +10,18 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Blocks unwanted cinematic handlers at the entry point:
+ * 在入口点拦截不需要的过场动画处理器：
  * <ul>
- *   <li>CAMERA - forced camera takeover (unless config.forceCameraMovement)</li>
- *   <li>BARS - letterbox black bars (unless config.blackBars)</li>
- *   <li>BLACK - full-screen black overlay (always cancelled)</li>
- *   <li>HIDE_GUI - GUI hiding (unless config.forceCameraMovement)</li>
+ *   <li>CAMERA - 强制镜头接管（除非 config.forceCameraMovement 启用）</li>
+ *   <li>BARS - 电影黑边（除非 config.blackBars 启用）</li>
+ *   <li>BLACK - 全屏黑屏覆盖（始终取消）</li>
+ *   <li>HIDE_GUI - GUI隐藏（除非 config.forceCameraMovement 启用）</li>
  * </ul>
- * Injection happens at HEAD of the enum-based startCinematicCamera overload,
- * which is also what the String-based overload delegates to, so every call
- * path is covered.
+ * 注入点在基于枚举的 startCinematicCamera 重载方法的 HEAD 处，
+ * 基于字符串的重载方法也会委托到此方法，因此覆盖了所有调用路径。
  *
- * remap = false: the target is a third-party mod class that is never
- * SRG-remapped, so the Mixin annotation processor must not look up an
- * obfuscation mapping for it.
+ * remap = false：目标是第三方模组类，不会进行 SRG 重映射，
+ * 因此 Mixin 注解处理器不能为其查找混淆映射。
  */
 @Mixin(BossesRiseClientCinematicCamera.class)
 public abstract class BossesRiseCinematicCameraMixin {

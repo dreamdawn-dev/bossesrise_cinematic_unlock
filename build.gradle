@@ -10,8 +10,8 @@ group = mod_group_id
 version = mod_version
 archivesBaseName = mod_id
 
-// Run Gradle on JDK 21+; the -release flag keeps the bytecode Java 17 compatible
-// (required by Minecraft 1.20.1 / Forge 47).
+// 在 JDK 21+ 上运行 Gradle；-release 标志保持字节码兼容 Java 17
+// （Minecraft 1.20.1 / Forge 47 所需）。
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 minecraft {

@@ -11,15 +11,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Cancels the potion effects Bosses'Rise applies to nearby entities while its
- * cinematics play (when config.forceCameraMovement is off):
+ * 取消 Bosses'Rise 在过场动画期间施加给附近实体的药水效果
+ * （当 config.forceCameraMovement 为 off 时）：
  * <ul>
- *   <li>DAMAGE_RESISTANCE amplifier 255 - Kraken intro/phase-transition, Dragon phase-transition and death</li>
- *   <li>MOVEMENT_SLOWDOWN amplifier 4 - Dragon phase-transition and death</li>
- *   <li>DAMAGE_RESISTANCE / MOVEMENT_SLOWDOWN amplifier 200 - Yeti enrage transition</li>
+ *   <li>伤害抗性 255级 - 克拉肯登场/阶段转换、龙阶段转换和死亡</li>
+ *   <li>缓慢 4级 - 龙阶段转换和死亡</li>
+ *   <li>伤害抗性/缓慢 200级 - 雪怪暴怒转换</li>
  * </ul>
- * These exact amplifiers are only ever used by the cinematic code, so the
- * filter does not touch normal gameplay effects.
+ * 这些精确的等级仅由过场动画代码使用，因此过滤器不会影响正常游戏中的效果。
  */
 @Mixin(LivingEntity.class)
 public abstract class BossesRiseEffectMixin {

@@ -3,30 +3,28 @@ package com.dreamdawn.bossesrise.cinematicunlock.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 /**
- * Client-side toggles for the patch.
+ * 补丁的客户端开关配置。
  *
- * forceCameraMovement = keep the original forced cinematic camera. When
- * enabled, cutscenes also keep their potion effects (Resistance/Slowness) and
- * hidden UI, exactly like the original mod. When disabled (default), the
- * camera stays free, the potion effects are cancelled and the UI stays
- * visible.
+ * forceCameraMovement = 保留原版强制过场镜头。启用时，过场动画也会保留药水效果
+ * （抗性/缓慢）和隐藏UI，与原模组完全一致。禁用时（默认），镜头保持自由，
+ * 药水效果被取消，UI保持可见。
  *
- * blackBars = keep the cinematic letterbox bars (default: disabled).
+ * blackBars = 保留过场电影黑边（默认：禁用）。
  *
- * The black-screen effect is always cancelled.
+ * 黑屏效果始终被取消。
  */
 public final class CinematicUnlockConfig {
 
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-    /** Keep the original forced cinematic camera (and its potion effects + hidden UI). */
+    /** 保留原版强制过场镜头（及其药水效果 + 隐藏UI）。 */
     public static final ForgeConfigSpec.BooleanValue FORCE_CAMERA_MOVEMENT = BUILDER
-            .comment("Keep the original forced cinematic camera. When enabled, cutscenes also keep their potion effects (Resistance/Slowness) and hidden UI, exactly like the original mod.")
+            .comment("保留原版强制过场镜头。启用时，过场动画也会保留药水效果（抗性/缓慢）和隐藏UI，与原模组完全一致。")
             .define("forceCameraMovement", false);
 
-    /** Keep the cinematic letterbox bars. */
+    /** 保留过场电影黑边。 */
     public static final ForgeConfigSpec.BooleanValue BLACK_BARS = BUILDER
-            .comment("Keep the cinematic letterbox bars.")
+            .comment("保留过场电影黑边。")
             .define("blackBars", false);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();

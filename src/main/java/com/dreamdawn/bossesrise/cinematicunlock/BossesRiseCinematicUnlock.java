@@ -8,14 +8,13 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
 /**
- * Bosses'Rise Cinematic Unlock.
+ * Bosses'Rise 过场动画解锁。
  *
- * Client-side patch: while Bosses'Rise cutscenes play, the mod normally takes
- * over the player camera (CAMERA handler) and draws letterbox bars (BARS
- * handler). This mod cancels those two handlers at their entry point
- * (BossesRiseClientCinematicCamera#startCinematicCamera) so the player keeps
- * full camera control and sees no black bars. All other cinematic effects
- * (black screen, shake, FOV, hidden GUI) remain untouched.
+ * 客户端补丁：Bosses'Rise 播放过场动画时，原模组会接管玩家镜头（CAMERA 处理器）
+ * 并绘制电影黑边（BARS 处理器）。本模组在入口点
+ * （BossesRiseClientCinematicCamera#startCinematicCamera）取消这两个处理器，
+ * 使玩家保持完整的镜头控制权，且不再看到黑边。其他过场动画效果
+ * （黑屏、抖动、视野变化、隐藏GUI）保持不变。
  */
 @Mod(BossesRiseCinematicUnlock.MOD_ID)
 public final class BossesRiseCinematicUnlock {

@@ -11,12 +11,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
- * Fixes a Bosses'Rise bug: AbstractStateBossEntity#setPlayingMusic updates the
- * server-side TrackedBoss record but then sends the OLD record to clients, so
- * clients never learn that the boss music should stop (e.g. while the kraken
- * plays its death cinematic). This redirect replaces the outgoing message with
- * the current map value, which has already been updated before the packet is
- * sent.
+ * 修复 Bosses'Rise 的一个Bug：AbstractStateBossEntity#setPlayingMusic 更新了
+ * 服务端 TrackedBoss 记录，但随后向客户端发送的是旧记录，导致客户端
+ * 无法得知 Boss 音乐应该停止（例如克拉肯播放死亡过场动画时）。
+ * 此 Redirect 将发出的数据包替换为当前映射值，该值在数据包发送前已被更新。
  */
 @Mixin(AbstractStateBossEntity.class)
 public abstract class StateBossMusicSyncMixin {

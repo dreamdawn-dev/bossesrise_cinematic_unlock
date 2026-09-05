@@ -10,15 +10,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Removes the yeti's "freeze" during its enrage transition cutscene.
+ * 移除雪怪暴怒转换过场动画期间的"冻结"效果。
  *
- * The original ClientEvents#updateMovementInput zeroes the local player's
- * movement input whenever a nearby yeti's DATA_GROUNDSMASH_ANIMTIME is between
- * 11 and 109. The yeti's ENRAGED state increments that counter every tick, so
- * the input lock also fires during the enrage cutscene, freezing the player in
- * place. The real ground-smash attack never actually drives that counter, so
- * dropping the lock only affects the cutscene. The ice gauntlet movement boost
- * is kept.
+ * 原始 ClientEvents#updateMovementInput 在附近雪怪的 DATA_GROUNDSMASH_ANIMTIME
+ * 值介于 11 到 109 之间时，会将本地玩家的移动输入归零。雪怪的 ENRAGED 状态
+ * 每 tick 都会递增该计数器，因此输入锁定也会在暴怒过场动画期间触发，
+ * 将玩家冻结在原地。真正的砸地攻击实际上不会驱动该计数器，
+ * 因此移除锁定仅影响过场动画。冰拳套的移动加速效果被保留。
  */
 @Mixin(ClientEvents.class)
 public abstract class YetiInputLockMixin {
