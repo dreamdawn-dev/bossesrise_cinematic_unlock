@@ -19,12 +19,12 @@ public final class CinematicUnlockConfig {
 
     /** 保留原版强制过场镜头（及其药水效果 + 隐藏UI）。 */
     public static final ForgeConfigSpec.BooleanValue FORCE_CAMERA_MOVEMENT = BUILDER
-            .comment("保留原版强制过场镜头。启用时，过场动画也会保留药水效果（抗性/缓慢）和隐藏UI，与原模组完全一致。")
+            .comment("Keep the original forced cinematic camera. When enabled, cutscenes also keep their potion effects (Resistance/Slowness) and hidden UI, exactly like the original mod.")
             .define("forceCameraMovement", false);
 
     /** 保留过场电影黑边。 */
     public static final ForgeConfigSpec.BooleanValue BLACK_BARS = BUILDER
-            .comment("保留过场电影黑边。")
+            .comment("Keep the cinematic letterbox bars.")
             .define("blackBars", false);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();

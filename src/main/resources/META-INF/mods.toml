@@ -7,7 +7,7 @@ modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
 authors="${mod_authors}"
-description='''Bosses''Rise 过场动画的客户端调整：自由镜头、无黑屏/黑边、无隐藏UI、无抗性/缓慢药水效果，并修复龙死亡过场动画期间 Boss 音乐持续播放的问题。'''
+description='''Client-side tweaks for Bosses''Rise cutscenes: free camera, no black screen/bars, no hidden UI, no Resistance/Slowness potion effects, plus a fix for the boss music that keeps playing through the dragon death cinematic.'''
 
 [[dependencies.${mod_id}]]
 modId="forge"
