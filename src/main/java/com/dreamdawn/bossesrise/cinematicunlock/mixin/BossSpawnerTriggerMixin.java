@@ -19,7 +19,7 @@ import net.unusual.block_factorys_bosses.init.BossesRiseEntities;
  * 移除龙刷怪笼对龙塔结构的要求。
  *
  * 原始行为：BossSpawnerBlock 仅在位于自然生成的龙塔结构内时才会生成狱炎龙。
- * 此 Mixin 替换了 tick 逻辑，使得任何站在刷怪笼方块 8 格范围内的玩家
+ * 此 Mixin 替换了 tick 逻辑，使得任何非创造模式玩家站在刷怪笼方块 8 格范围内
  * 都足以召唤龙，无论方块位于何处。保留了"如果附近已有 Boss 则摧毁刷怪笼"的守卫逻辑。
  */
 @Mixin(BossSpawnerBlockEntity.class)
@@ -43,8 +43,11 @@ public abstract class BossSpawnerTriggerMixin {
             return;
         }
 
-        // 新的触发条件：任意玩家在 8 格范围内（距离平方 < 64）。
+        // 新的触发条件：任意非创造模式玩家在 8 格范围内（距离平方 < 64）。
         for (Player player : serverLevel.players()) {
+            if (player.isCreative()) {
+                continue;
+            }
             if (player.distanceToSqr(pos.getCenter()) < 64.0) {
                 Entity dragon = BossesRiseEntities.INFERNAL_DRAGON.get().create(serverLevel);
                 if (dragon != null) {
